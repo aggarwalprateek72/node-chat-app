@@ -20,9 +20,10 @@ io.on('connection', (socket)=>{
     
     socket.broadcast.emit('newMessage', generateMessage('Admin','New User Joined'));
     
-    socket.on('createMessage',(createmessage)=>{
+    socket.on('createMessage',(createmessage, callback)=>{
        console.log('Created message', createmessage); 
         io.emit('newMessage', generateMessage(createmessage.from, createmessage.text));
+        callback();
     });
     
     socket.on('createLocationMessage', (coords)=>{
